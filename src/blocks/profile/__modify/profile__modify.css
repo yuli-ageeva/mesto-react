@@ -1,0 +1,23 @@
+.profile__modify {
+  padding: 0;
+  border: 1px solid #FFFFFF;
+  width: 24px;
+  height: 24px;
+  background-color: #000;
+  background-image: url(../../../images/pen.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.profile__modify:hover {
+  opacity: 0.6;
+}
+
+@media screen and (max-width:900px) {
+  .profile__modify {
+    width: 18px;
+    height: 18px;
+  }
+}

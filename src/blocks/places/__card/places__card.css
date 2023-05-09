@@ -1,0 +1,9 @@
+.places__card {
+  position: relative;
+}
+
+@media screen and (max-width:900px) {
+  .places__card {
+    margin: 0 19px;
+  }
+}

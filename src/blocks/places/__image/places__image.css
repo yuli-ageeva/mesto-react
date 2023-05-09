@@ -1,0 +1,10 @@
+.places__image {
+  display: block;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  border-radius: 10px 10px 0 0;
+  object-fit: cover;
+  height: 282px;
+  cursor: pointer;
+}

@@ -1,0 +1,11 @@
+.profile__author {
+  display: flex;
+  align-items: baseline;
+  gap: 18px;
+}
+
+@media screen and (max-width:900px) {
+  .profile__author {
+    gap: 10px;
+  }
+}

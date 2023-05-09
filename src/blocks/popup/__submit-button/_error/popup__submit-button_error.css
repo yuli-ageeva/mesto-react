@@ -1,0 +1,10 @@
+.popup__submit-button_error {
+  color: #000000;
+  background-color: #FFFFFF;
+  border: 1px solid #000000;
+  opacity: 0.2;
+}
+
+.popup__submit-button_error:hover {
+  opacity: 0.2;
+}

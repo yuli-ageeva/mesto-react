@@ -1,0 +1,9 @@
+.places__description {
+  display: flex;
+  background-color: #FFF;
+  border-radius: 0 0 10px 10px;
+  padding: 25px 20px 25px 21px;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
