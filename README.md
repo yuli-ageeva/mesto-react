@@ -18,13 +18,17 @@ https://yuli-ageeva.github.io/mesto-react/
 ## Запуск проекта 
 Вы можете запустить проект:
 
-`npm start`
+```bash
+npm start
+```
 
 Приложение запускается в режиме разработки.
 Откройте http://localhost:3000, чтобы просмотреть его в браузере.
 
 ## Сборка проекта
 
-`npm run build`
+```bash
+npm run build
+```
 
 Выполняет сборку проекта в директорию `build`
