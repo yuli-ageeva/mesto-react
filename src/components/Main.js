@@ -21,7 +21,7 @@ function Main(props) {
         console.log(err);
       });
 
-  })
+  },[])
 
   return (
     <main>
