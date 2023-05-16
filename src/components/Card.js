@@ -1,32 +1,41 @@
 import React from "react";
+import CurrentUserContext from "../context/CurrentUserContext";
 
-function Card({
-                _id,
-                name,
-                link,
-                likes,
-                owner,
-                onClick,
-              }) {
+function Card(props) {
+  const card = props.card;
+  const currentUser = React.useContext(CurrentUserContext);
+  const isOwn = card.owner._id === currentUser._id;
+  const isLiked = card.likes.some(i => i._id === currentUser._id);
+  const cardLikeButtonClassName = (
+    `places__like ${isLiked && 'places__like_active'}`
+  );
 
   function handleCard() {
-    onClick({name, link})
+    props.onClick(card);
+  }
+
+  function handleLikeClick() {
+    props.onCardLike(card);
+  }
+
+  function handleDeleteClick() {
+    props.onCardDelete(card);
   }
 
   return (
     <article className="places__card">
-      <img className="places__image" src={link} alt={name} onClick={handleCard}/>
+      <img className="places__image" src={card.link} alt={card.name} onClick={handleCard}/>
       <div className="places__description">
-        <h3 className="places__name">{name}
-        </h3>
+        <h3 className="places__name">{card.name}</h3>
         <div className="places__likes">
-          <button className="places__like" type="button"></button>
-          <p className="places__like-number">{likes.length}</p>
+          <button type="button" className={cardLikeButtonClassName} onClick={handleLikeClick}></button>
+          <p className="places__like-number">{card.likes.length}</p>
         </div>
       </div>
-      <button className="places__button_delete" type="button" aria-label="удалить"></button>
+      {isOwn && <button className="places__button_delete" type="button" aria-label="удалить"
+                        onClick={handleDeleteClick}></button>}
     </article>
-  )
+  );
 }
 
-export default Card
+export default Card;
