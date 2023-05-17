@@ -4,11 +4,11 @@ import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
 import ImagePopup from "./ImagePopup";
-import PopupWithForm from "./PopupWithForm";
 import EditProfilePopup from "./EditProfilePopup";
 import api from "../utils/Api";
 import CurrentUserContext from "../context/CurrentUserContext";
 import EditAvatarPopup from "./EditAvatarPopup";
+import AddPlacePopup from "./AddPlacePopup";
 
 function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
@@ -32,7 +32,6 @@ function App() {
   function handleCardLike(card) {
     const isLiked = card.likes.some(user => user._id === currentUser._id);
 
-    // Отправляем запрос в API и получаем обновлённые данные карточки
     api.toggleLike(card._id, isLiked).then((newCard) => {
       setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
     })
@@ -75,6 +74,18 @@ function App() {
       });
   }
 
+  function handleAddPlaceSubmit(newCard) {
+    api.addNewCard(newCard)
+      .then((addedCard) => {
+        setCards([addedCard, ...cards]);
+        closeAllPopups();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+
   const handleEditAvatarClick = () => {
     setIsEditAvatarPopupOpen(true);
   };
@@ -111,27 +122,14 @@ function App() {
                 onCardDelete={handleCardDelete}
                 cards={cards}/>
           <Footer/>
-          <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser}>
+          <EditProfilePopup isOpen={isEditProfilePopupOpen}
+                            onClose={closeAllPopups}
+                            onUpdateUser={handleUpdateUser}>
           </EditProfilePopup>
-
-          <PopupWithForm isOpen={isAddPlacePopupOpen}
+          <AddPlacePopup isOpen={isAddPlacePopupOpen}
                          onClose={closeAllPopups}
-                         name={'add'}
-                         title={'Новое место'}
-                         buttonName={'Создать'}>
-            <label className="popup__section">
-              <input className="popup__input popup__input_type_title" id="title-input" type="text"
-                     name="name"
-                     placeholder="Название" maxLength="30" minLength="2" required/>
-              <span className="popup__input-error title-input-error"></span>
-            </label>
-            <label className="popup__section">
-              <input className="popup__input popup__input_type_link" id="link-input" type="url"
-                     name="link"
-                     placeholder="Ссылка на картинку" required/>
-              <span className="popup__input-error link-input-error"></span>
-            </label>
-          </PopupWithForm>
+                         onAddPlace={handleAddPlaceSubmit}>
+          </AddPlacePopup>
           <ImagePopup card={selectedCard} onClose={closeAllPopups}/>
           <div className="popup popup_confirm">
             <div className="popup__container popup__container-confirm">
